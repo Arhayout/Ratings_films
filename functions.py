@@ -206,11 +206,11 @@ def GD(RDD,M,N,K,MAXITER=50, GAMMA=0.001, LAMBDA=0.05, adaptive=0):
     """ 
     
     # Initialize the user and item feature matrices to random values
-    """"P = np.random.rand(M, K)
-    Q = np.random.rand(N, K) """" 
-    K = 14 # rank parameter (best chose)
+    P = np.random.rand(M, K)
+    Q = np.random.rand(N, K) 
+    """K = 14 # rank parameter (best chose)
     P = np.zeros((M,K)) # user's features matrix (M by K)
-    Q = np.zeros((N,K)) # item's features matrix (N by K)  
+    Q = np.zeros((N,K)) # item's features matrix (N by K)  """
     # Initialize the lists to store the MSE and regularized MSE after each iteration
     lreg_mse = []
     lmse = []
@@ -236,15 +236,12 @@ def GD(RDD,M,N,K,MAXITER=50, GAMMA=0.001, LAMBDA=0.05, adaptive=0):
 
         # Compute the regularized MSE and MSE on the training set
         mse = computeMSE(RDD, P, Q)
-        print('mse :' ,mse)
-        print('reg_mse :', reg_mse)
-             
+        
         # Append the errors to the lists
         lreg_mse.append(reg_mse)
         lmse.append(mse)
 
         # Increment the iteration counter
         iter += 1
-        print(iter)
 
     return P, Q, lreg_mse, lmse
